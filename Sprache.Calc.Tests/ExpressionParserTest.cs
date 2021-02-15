@@ -192,12 +192,6 @@ namespace Sprache.Calc.Tests
             var funcs = ExpressionCalculator.CreateFunctionRegister();
             funcs.RegisterFunctionEnumerable<int>("NumElements", list => list.Count());
             funcs.RegisterFunc<string, string, object>("ValOfLookup", (listName, key) => Lookup[listName][key]);
-            funcs.RegisterExpression("IsParam", (parameters) =>
-            {
-                var values = parameters.Select(ToValue).ToList();
-                var isVal = values.Take(values.Count - 1).Any(a => object.Equals(a, values.Last()));
-                return isVal;
-            });
 
             var calc = new LogicCalculator(funcs);
             var invokableExpression = calc.ParseBoolExpression(expression, new Dictionary<string, object>());

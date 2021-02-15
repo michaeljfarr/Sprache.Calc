@@ -26,23 +26,6 @@ namespace Sprache.Calc.Internals
         public static Parser<ExpressionType> NotEqual =>
             Operator("!=", ExpressionType.NotEqual);
 
-        public static Parser<ExpressionType> Add =>
-            Operator("+", ExpressionType.AddChecked);
-
-        public static Parser<ExpressionType> Subtract =>
-            Operator("-", ExpressionType.SubtractChecked);
-
-        public static Parser<ExpressionType> Multiply =>
-            Operator("*", ExpressionType.MultiplyChecked);
-
-        public static Parser<ExpressionType> Divide =>
-            Operator("/", ExpressionType.Divide);
-
-        public static Parser<ExpressionType> Modulo =>
-            Operator("%", ExpressionType.Modulo);
-
-        public static Parser<ExpressionType> Power =>
-            Operator("^", ExpressionType.Power);
 
         public static Parser<Expression> QuotedText =
             from open in Parse.Char('"')
@@ -60,19 +43,6 @@ namespace Sprache.Calc.Internals
             Parse.Char(':').AtLeastOnce().Text().Then(f => Parse.Letter.AtLeastOnce().Text().Then(h =>
                 Parse.LetterOrDigit.Or(Parse.Char(':')).Or(Parse.Char('_')).Or(Parse.Char('.')).Many().Text().Select(t => f + h + t))).Token();
 
-        public static Parser<string> DecimalWithoutLeadingDigits =>
-            from dot in Parse.Char('.')
-            from fraction in Parse.Number
-            select dot + fraction;
 
-        public static Parser<string> DecimalWithLeadingDigits =>
-            Parse.Number.Then(n => DecimalWithoutLeadingDigits.XOr(Parse.Return(String.Empty)).Select(f => n + f));
-
-        public static Parser<string> DecimalA => DecimalWithLeadingDigits.XOr(DecimalWithoutLeadingDigits);
-
-        public static Parser<string> Decimal =>
-            from d in DecimalA
-            from e in NumericComponents.Exponent.Optional()
-            select d + e.GetOrElse(String.Empty);
     }
 }

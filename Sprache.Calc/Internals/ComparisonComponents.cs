@@ -1,44 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Globalization;
-using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Sprache.Calc.Internals
 {
-
-    internal abstract partial class SimpleCalculator
-    {
-        // lowest priority first
-        Parser<Expression> OrTerm =>
-            Parse.ChainOperator(OpOr, AndTerm, ParameterComponents.MakeTypeAlignedBinary);
-
-        static Parser<ExpressionType> OpOr => MakeOperator("or", ExpressionType.OrElse).Or(MakeOperator("||", ExpressionType.OrElse));
-
-        Parser<Expression> AndTerm =>
-            Parse.ChainOperator(OpAnd, NotTerm, ParameterComponents.MakeTypeAlignedBinary);
-
-        static Parser<ExpressionType> OpAnd => MakeOperator("and", ExpressionType.AndAlso).Or(MakeOperator("&&", ExpressionType.AndAlso));
-
-
-        protected Parser<Expression> TreeTop => FormulaMath;//.XOr(FormulaMathsValuesA);
-
-        Parser<Expression> NotFactor =>
-            from negate in Parse.IgnoreCase("!").Token()
-            from expr in FormulaTop
-            select Expression.Not(expr);
-        
-        Parser<Expression> NotTerm => NotFactor.Or(FormulaTop);
-    
-
-        static Parser<Expression> BooleanLiteral =>
-            Parse.IgnoreCase("true").Or(Parse.IgnoreCase("false"))
-            .Text().Token()
-            .Select(value => Expression.Constant(bool.Parse(value)));
-
-        static Parser<ExpressionType> MakeOperator(string token, ExpressionType type)
-            => Parse.IgnoreCase(token).Token().Return(type);
-    }
     internal static class ComparisonComponents
     {
         private static bool ToBool(object value)

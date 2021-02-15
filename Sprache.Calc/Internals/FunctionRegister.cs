@@ -6,11 +6,9 @@ using System.Reflection;
 
 namespace Sprache.Calc.Internals
 {
-    public delegate object ObjectFunc(params object[] args);
     internal class FunctionRegister : IFunctionRegister
     {
         private Dictionary<string, object> CustomFunctions { get; } = new Dictionary<string, object>();
-        private Dictionary<string, Func<Expression[], object>> CustomExpressions { get; } = new Dictionary<string, Func<Expression[], object>>();
         private Dictionary<string, ObjectFunc> CustomExpressions2 { get; } = new Dictionary<string, ObjectFunc>();
 
         private static string MangleName(string name, int numParameters)
@@ -48,11 +46,6 @@ namespace Sprache.Calc.Internals
                 return Expression.Call(Expression.Constant(@object), method, paramArray);
             }
 
-            if (CustomExpressions.ContainsKey(name))
-            {
-                throw new NotImplementedException();
-            }
-            
             // now look up a custom function 
             var mangledName = MangleName(name, parameters.Length);
             if (CustomFunctions.ContainsKey(mangledName))
@@ -65,13 +58,18 @@ namespace Sprache.Calc.Internals
             }
 
             // fall back to System.Math functions
-            return SimpleCalculator.CallMathFunction(name, parameters);
+            return CallMathFunction(name, parameters);
         }
-
-        public IFunctionRegister RegisterExpression(string name, Func<Expression[], object> function)
+        public static Expression CallMathFunction(string name, params Expression[] parameters)
         {
-            CustomExpressions[name] = function;
-            return this;
+            var methodInfo = typeof(Math).GetMethod(name, parameters.Select(e => e.Type).ToArray());
+            if (methodInfo == null)
+            {
+                throw new ParseException(
+                    $"Function '{name}({string.Join(",", parameters.Select(e => e.Type.Name))})' does not exist.");
+            }
+
+            return Expression.Call(methodInfo, parameters);
         }
 
         public IFunctionRegister RegisterExpression2(string name, ObjectFunc function)
