@@ -54,7 +54,7 @@ namespace Sprache.Calc.Tests
             
             var calc = new LogicCalculator(funcs);
             //var values = new Dictionary<string, object>() {{"x", 4}, {"y", 5}};
-            var values = new Dictionary<string, object>() {{"x", 4}, {"y", 5}};
+            var values = new Dictionary<string, object>() {{"x", 4}, {"y", 5m}};
             var vals = new DictionaryBasedInputScope(values);
             var expr = calc.ParseBoolExpression(expression, values);
             var func = expr.Compile();
@@ -157,12 +157,15 @@ namespace Sprache.Calc.Tests
         [InlineData("'cat' > 'dog'", false)]
         [InlineData("'cat' == 'dog'", false)]
         [InlineData("'cat' == 'cat'", true)]
+        [InlineData("'true' == true", false)]
+        [InlineData("'false' && true", false)]
+        [InlineData("'true' && true", true)]
         [InlineData(":List1:SixAsInt < :List1:SevenAsDouble", true)]
         [InlineData(":List1:SixAsInt * 5", 30)]
         [InlineData(":List1:SevenAsDouble * 5", 35)]
         [InlineData("(:List1:SevenAsDouble * 5) > (:List1:SixAsInt * 5)", true)]
         [InlineData("NumElements(:List1:OneTwoThree)", 3)]
-        public void TestTypeCoersionAndReferences(string expression, object expectedValue)
+        public void TestTypeCoercionAndReferences(string expression, object expectedValue)
         {
             var vals = new FuncBasedInputScope(a =>
             {

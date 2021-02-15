@@ -53,16 +53,14 @@ namespace Sprache.Calc.Internals
 
             if (isLogical)
             {
-                if (left.Type == typeof(object))
+                if (left.Type != typeof(bool))
                 {
-                    //right = ConvertTo(right, typeof(double));
                     left = Expression.Call(ComparisonComponents.ToBoolMethodInfo,
                         Expression.Convert(left, typeof(object)));
                 }
 
-                if (right.Type == typeof(object))
+                if (right.Type != typeof(bool))
                 {
-                    //right = ConvertTo(right, typeof(double));
                     right = Expression.Call(ComparisonComponents.ToBoolMethodInfo,
                         Expression.Convert(right, typeof(object)));
                 }
@@ -82,38 +80,22 @@ namespace Sprache.Calc.Internals
                             }), Expression.Constant(0)), typeof(object));
             }
 
-            if (binaryType == ExpressionType.Power)
-            {
-                left = Expression.Convert(left, typeof(double));
-                right = Expression.Convert(right, typeof(double));
-            }
-            else if (binaryType == ExpressionType.MultiplyChecked || binaryType == ExpressionType.AddChecked ||
+
+            if (binaryType == ExpressionType.Power || binaryType == ExpressionType.MultiplyChecked || binaryType == ExpressionType.AddChecked ||
                      binaryType == ExpressionType.SubtractChecked || binaryType == ExpressionType.Divide)
             {
-                //if either side is a double, convert the other to double
-                if (left.Type == typeof(double) || left.Type == typeof(float))
-                {
-                    //right = ConvertTo(right, typeof(double));
-                    right = Expression.Call(ComparisonComponents.ToDoubleMethodInfo,
-                        Expression.Convert(right, typeof(object)));
-                }
-                else if (right.Type == typeof(double) || right.Type == typeof(float))
-                {
-                    //left = ConvertTo(left, typeof(double));
-                    left = Expression.Call(ComparisonComponents.ToDoubleMethodInfo,
-                        Expression.Convert(left, typeof(object)));
-                }
-                else
-                {
-                    //otherwise convert both to decimals
-                    left = Expression.Convert(left, typeof(double));
-                    right = Expression.Convert(right, typeof(double));
-                }
+                right = ConvertViaMethod(right, ComparisonComponents.ToDoubleMethodInfo);
+                left = ConvertViaMethod(left, ComparisonComponents.ToDoubleMethodInfo);
             }
 
             return Expression.Convert(
                 Expression.MakeBinary(binaryType, left, right, false, (MethodInfo) null, (LambdaExpression) null),
                 typeof(object));
+        }
+
+        private static MethodCallExpression ConvertViaMethod(Expression exp, MethodInfo conversionMethod)
+        {
+            return Expression.Call(conversionMethod, Expression.Convert(exp, typeof(object)));
         }
     }
 }

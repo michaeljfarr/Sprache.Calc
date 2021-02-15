@@ -39,6 +39,14 @@ namespace Sprache.Calc.Internals
 
         private static int Compare(object left, object right)
         {
+            if (left is string && !(right is string))
+            {
+                return -1;
+            }
+            if (!(left is string) && right is string)
+            {
+                return 1;
+            }
             if (left is double || left is float)
             {
                 if (right == null)

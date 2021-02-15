@@ -23,10 +23,10 @@ namespace Sprache.Calc.Internals
             return parameters.Select(((expression, i) =>
             {
                 var targetType = targetTypes[i];
-                // if (targetType.IsAssignableFrom(expression.Type))
-                // {
-                //     return expression;
-                // }
+                if (targetType == expression.Type)
+                {
+                    return expression;
+                }
 
                 return Expression.Convert(expression, targetType);
             }));
