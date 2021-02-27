@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprache.Calc", "Sprache.Calc\Sprache.Calc.csproj", "{11367BD5-8383-4CB4-9DA1-09183A707D9E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprache.LogicCalc", "Sprache.LogicCalc\Sprache.LogicCalc.csproj", "{11367BD5-8383-4CB4-9DA1-09183A707D9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprache.Calc.Tests", "Sprache.Calc.Tests\Sprache.Calc.Tests.csproj", "{356BFEB0-0255-4231-BF17-FB7301C17D16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprache.LogicCalc.Tests", "Sprache.LogicCalc.Tests\Sprache.LogicCalc.Tests.csproj", "{356BFEB0-0255-4231-BF17-FB7301C17D16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprache.Calc.Sample", "Sprache.Calc.Sample\Sprache.Calc.Sample.csproj", "{0C3B8196-B921-47CD-8292-C7A495551064}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprache.LogicCalc.Sample", "Sprache.LogicCalc.Sample\Sprache.LogicCalc.Sample.csproj", "{0C3B8196-B921-47CD-8292-C7A495551064}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D7319B7-C755-455E-A4B7-43AD7691E3E3}"
 ProjectSection(SolutionItems) = preProject

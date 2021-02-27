@@ -54,7 +54,7 @@ steps:
       testRunner: VSTest
       testResultsFiles: '**/*.trx'
 
-  - script: dotnet pack Sprache.Calc --no-restore --no-build -c $(buildConfiguration) -p:Version=$(Build.BuildNumber) -o $(Build.ArtifactStagingDirectory)/
+  - script: dotnet pack Sprache.LogicCalc --no-restore --no-build -c $(buildConfiguration) -p:Version=$(Build.BuildNumber) -o $(Build.ArtifactStagingDirectory)/
     displayName: '[DOTNET] Pack'
 
   - task: NuGetCommand@2

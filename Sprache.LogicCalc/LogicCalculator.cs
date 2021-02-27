@@ -97,7 +97,7 @@ namespace Sprache.Calc
             expr = expr
         }).SelectMany(_param1 => Parse.Char(')'), (_param1, rparen) => _param1.expr);
 
-        private new Parser<Expression> ObjExpr => Parse.ChainOperator<Expression, ExpressionType>(this.Add.Or<ExpressionType>(this.Subtract), this.Term, new Func<ExpressionType, Expression, Expression, Expression>(ParameterComponents.MakeTypeAlignedBinary));
+        private Parser<Expression> ObjExpr => Parse.ChainOperator<Expression, ExpressionType>(this.Add.Or<ExpressionType>(this.Subtract), this.Term, new Func<ExpressionType, Expression, Expression, Expression>(ParameterComponents.MakeTypeAlignedBinary));
 
         protected virtual Parser<LambdaExpression> LambdaBool =>
             ObjExpr.End().Select(body => Expression.Lambda<Func<Dictionary<string, object>, IInputScope, object>>(Expression.Convert(body, typeof(object)), this.ParameterExpression, ParameterComponents.ParameterExpression));

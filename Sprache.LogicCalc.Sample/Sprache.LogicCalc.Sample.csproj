@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sprache.Calc\Sprache.Calc.csproj" />
+    <ProjectReference Include="..\Sprache.LogicCalc\Sprache.LogicCalc.csproj" />
   </ItemGroup>
 
 </Project>

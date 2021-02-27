@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("Sprache.Calc.Tests")]
+[assembly:InternalsVisibleTo("Sprache.LogicCalc.Tests")]
 namespace Sprache.Calc
 {
 	/// <summary>

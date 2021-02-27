@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <PackageVersion></PackageVersion>
-    <Title>Sprache Calculator</Title>
-    <Authors>Alexey Yakovlev, Andrey Leskov</Authors>
+    <Title>Sprache Logic Calculator</Title>
+    <Authors>Alexey Yakovlev, Andrey Leskov, Michael Farr</Authors>
     <Description>Easy to use extensible expression evaluator built on top of Sprache parser library. Compiles expressions to native code for best performance. Supports custom functions and parameters.</Description>
-    <Copyright>Copyright © 2019 Alexey Yakovlev, Andrey Leskov</Copyright>
+    <Copyright>Copyright © 2021 Michael Farr</Copyright>
     <PackageProjectUrl>https://github.com/yallie/Sprache.Calc</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/yallie/Sprache.Calc/blob/master/LICENSE.txt</PackageLicenseUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/yallie/Sprache.Calc/master/Sprache.Calc.Icons/SpracheCalc4.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/yallie/Sprache.Calc</RepositoryUrl>
+    <RepositoryUrl>https://github.com/michaeljfarr/Sprache.Calc</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>sprache expression expressions evaluator calculator parser parsers linq monad</PackageTags>
     <PackageReleaseNotes>Sprache toolkit grammar inheritance sample. Updated for .Net Standard 1.6 and added functionality to add user-defined functions from strings. For more details, see https://github.com/yallie/Sprache.Calc</PackageReleaseNotes>
