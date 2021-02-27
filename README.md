@@ -14,3 +14,10 @@ provides the calculation functions:
 * variables and constants
   * (x + :y)
 
+## Constants
+Constants are specified as an alphanumeric sequence (such as x in the example above).  The values
+are injected as constants into the expression.
+
+## Variables
+Variables are specified as colon followed by an alphanumeric sequence (such as :y in the example above).  
+The values are retrieved via an IInputScope every time the expression is evaluated.
